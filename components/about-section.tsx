@@ -8,6 +8,7 @@ import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Award } from "lucide-react";
+import { AvatarModel } from "@/components/3d/AvatarModel";
 
 const skills = [
   "JavaScript", "TypeScript", "React", "Next.js", "Node.js", 
@@ -34,16 +35,6 @@ const education = [
     description: "Aggregate - 87%"
   }
 ];
-
-// Simple 3D Avatar component
-const Avatar = () => {
-  return (
-    <mesh>
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshStandardMaterial color="#8A2BE2" />
-    </mesh>
-  );
-};
 
 export function AboutSection() {
   const [bioRef, bioInView] = useInView({
@@ -89,13 +80,10 @@ export function AboutSection() {
             >
               <h3 className="text-2xl font-bold mb-4">Who I Am</h3>
               <p className="text-muted-foreground mb-4">
-                I'm a passionate Full-stack Developer and AI Specialist with over 5 years of experience building innovative solutions for complex problems. My journey in technology began at IIT Mumbai and continued at Stanford University, where I honed my skills in both software engineering and artificial intelligence.
+                I'm a passionate Full-stack Developer and AI Enthusiast building innovative solutions for complex problems. My journey in technology began at Dwarkadas Jivanlal Sanghvi College of Engineering, where I am currently pursuing my B.Tech in Computer Science and Engineering (Data Science).
               </p>
               <p className="text-muted-foreground mb-4">
                 I specialize in creating performant web applications using modern JavaScript frameworks while also implementing cutting-edge AI solutions. My goal is to bridge the gap between powerful backend systems and intuitive user experiences.
-              </p>
-              <p className="text-muted-foreground">
-                When I'm not coding, you can find me contributing to open-source projects, writing technical articles, or exploring the latest advancements in AI research.
               </p>
             </motion.div>
 
@@ -143,13 +131,38 @@ export function AboutSection() {
             transition={{ duration: 0.6 }}
             className="flex flex-col space-y-8"
           >
-            <div className="avatar-container bg-secondary/30 rounded-lg overflow-hidden">
+            <div className="avatar-container bg-secondary/30 rounded-lg overflow-hidden h-[400px]">
               <Canvas>
-                <PerspectiveCamera makeDefault position={[0, 0, 3]} />
-                <ambientLight intensity={0.5} />
-                <pointLight position={[10, 10, 10]} intensity={1} />
-                <Avatar />
-                <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
+                <PerspectiveCamera makeDefault position={[0, 0.5, 2]} />
+                <ambientLight intensity={1.2} />
+                <directionalLight 
+                  position={[5, 5, 5]} 
+                  intensity={1.5} 
+                  castShadow 
+                />
+                <directionalLight 
+                  position={[-5, 5, -5]} 
+                  intensity={1} 
+                />
+                <pointLight 
+                  position={[0, 2, 0]} 
+                  intensity={1} 
+                  distance={5}
+                />
+                <spotLight
+                  position={[0, 5, 0]}
+                  angle={0.5}
+                  penumbra={0.5}
+                  intensity={1}
+                  castShadow
+                />
+                <AvatarModel />
+                <OrbitControls 
+                  enableZoom={false} 
+                  minPolarAngle={Math.PI / 2.5}
+                  maxPolarAngle={Math.PI / 2}
+                />
+                <fog attach="fog" args={['#ffffff', 5, 15]} />
               </Canvas>
             </div>
 

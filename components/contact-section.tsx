@@ -99,15 +99,15 @@ export function ContactSection() {
               <div className="mb-4">Hello, World!</div>
               <div className="terminal-prompt">contact --info</div>
               <div className="mb-2">Name: Saumya Desai</div>
-              <div className="mb-2">Email: hello@saumyadesai.com</div>
-              <div className="mb-2">Location: San Francisco, CA</div>
+              <div className="mb-2">Email: saumyadesai521@gmail.com</div>
+              <div className="mb-2">Location: Mumbai, India</div>
               <div className="mb-4">Availability: Open to opportunities</div>
               <div className="terminal-prompt">_</div>
             </div>
 
             <div className="flex space-x-4">
               <a
-                href="https://github.com/saumyadesai"
+                href="https://github.com/saumyadesai17"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
@@ -123,15 +123,7 @@ export function ContactSection() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="https://twitter.com/saumyadesai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:hello@saumyadesai.com"
+                href="mailto:saumyadesai521@gmail.com"
                 className="social-link"
               >
                 <Mail className="h-5 w-5" />

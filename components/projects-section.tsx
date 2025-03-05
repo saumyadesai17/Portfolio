@@ -116,59 +116,59 @@ export function ProjectsSection() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="masonry-grid mt-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12"
         >
           {projects.map((project) => (
             <motion.div
               key={project.id}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               variants={item}
-              className="project-card hover-effect"
+              className="project-card hover-effect bg-card rounded-lg overflow-hidden shadow-lg"
               onClick={() => setSelectedProject(project)}
             >
-              <div className="relative aspect-video overflow-hidden rounded-t-lg">
+              <div className="relative aspect-video overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                 />
               </div>
-              <div className="project-card-content">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold mb-2">{project.title}</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.technologies.slice(0, 3).map((tech, index) => (
-                    <Badge key={index} variant="outline">
+                    <Badge key={index} variant="outline" className="text-xs sm:text-sm">
                       {tech}
                     </Badge>
                   ))}
                   {project.technologies.length > 3 && (
-                    <Badge variant="outline">+{project.technologies.length - 3}</Badge>
+                    <Badge variant="outline" className="text-xs sm:text-sm">+{project.technologies.length - 3}</Badge>
                   )}
                 </div>
                 <div className="flex justify-between">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-primary hover:text-primary/80"
+                    className="text-primary hover:text-primary/80 text-xs sm:text-sm"
                     onClick={(e) => {
                       e.stopPropagation();
                       window.open(project.github, "_blank");
                     }}
                   >
-                    <Github className="mr-2 h-4 w-4" />
+                    <Github className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     Code
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="text-primary hover:text-primary/80"
+                    className="text-primary hover:text-primary/80 text-xs sm:text-sm"
                     onClick={(e) => {
                       e.stopPropagation();
                       window.open(project.demo, "_blank");
                     }}
                   >
-                    <ExternalLink className="mr-2 h-4 w-4" />
+                    <ExternalLink className="mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     Demo
                   </Button>
                 </div>
@@ -178,38 +178,61 @@ export function ProjectsSection() {
         </motion.div>
 
         <Dialog open={!!selectedProject} onOpenChange={(open) => !open && setSelectedProject(null)}>
-          <DialogContent className="max-w-3xl">
+          <DialogContent className="max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[75vw] max-h-[90vh] sm:mx-4 md:mx-6 p-4 sm:p-6 flex flex-col">
             {selectedProject && (
               <>
-                <DialogHeader>
-                  <DialogTitle className="text-2xl">{selectedProject.title}</DialogTitle>
+                <DialogHeader className="flex-none">
+                  <DialogTitle className="text-xl sm:text-2xl font-bold">{selectedProject.title}</DialogTitle>
                 </DialogHeader>
-                <div className="relative aspect-video overflow-hidden rounded-lg mb-4">
-                  <img
-                    src={selectedProject.image}
-                    alt={selectedProject.title}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="flex-1 overflow-y-auto mt-4 pr-2">
+                  <div className="relative w-full max-w-2xl mx-auto aspect-[16/9] overflow-hidden rounded-lg mb-4 sm:mb-6">
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <DialogDescription className="text-foreground mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
+                    {selectedProject.longDescription}
+                  </DialogDescription>
+                  <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                    {selectedProject.technologies.map((tech, index) => (
+                      <Badge 
+                        key={index} 
+                        variant="outline" 
+                        className="text-xs sm:text-sm px-2 py-0.5"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-                <DialogDescription className="text-foreground mb-4">
-                  {selectedProject.longDescription}
-                </DialogDescription>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {selectedProject.technologies.map((tech, index) => (
-                    <Badge key={index} variant="outline">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex justify-end space-x-4">
-                  <Button variant="outline" asChild>
-                    <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
+                <div className="flex-none flex flex-col sm:flex-row justify-end gap-2 sm:gap-4 pt-4 mt-4 border-t">
+                  <Button 
+                    variant="outline" 
+                    asChild 
+                    className="w-full sm:w-auto text-sm sm:text-base"
+                  >
+                    <a 
+                      href={selectedProject.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
                       <Github className="mr-2 h-4 w-4" />
                       View Code
                     </a>
                   </Button>
-                  <Button asChild>
-                    <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer">
+                  <Button 
+                    asChild 
+                    className="w-full sm:w-auto text-sm sm:text-base"
+                  >
+                    <a 
+                      href={selectedProject.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Live Demo
                     </a>
