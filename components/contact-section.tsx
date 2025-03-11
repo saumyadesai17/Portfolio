@@ -115,7 +115,7 @@ export function ContactSection() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com/in/saumyadesai"
+                href="https://www.linkedin.com/in/saumya-desai-42757328a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-link"
@@ -123,7 +123,9 @@ export function ContactSection() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:saumyadesai521@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=saumyadesai521@gmail.com&su=Portfolio%20Contact&body=Hi%20Saumya,%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect%20regarding..."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="social-link"
               >
                 <Mail className="h-5 w-5" />
